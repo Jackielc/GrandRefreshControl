@@ -24,7 +24,6 @@
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"fact==%f,y==%f",self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset,y);
         if (y>=self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset)
         {
             [self refreshControlWillEnterRefreshState];
