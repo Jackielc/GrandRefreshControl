@@ -13,6 +13,8 @@
 
 方法选择器
 ---
+
+###tableView
 ```objective-c
 //case tableView
     self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(request)];
@@ -22,7 +24,9 @@
           [self.tableView.header endRefresh];
           [self.tableView.footer endRefresh];
     });
-//case collectionView
+```
+###collectionView
+```objective-c
     self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(request)];
     self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(request)];
     
