@@ -29,17 +29,17 @@
 ---
 ```objective-c
 //case tableView
-    self.tableView.header = [RefreshHeader headerWithNetStep:^{
+    self.tableView.header = [RefreshHeader headerWithNextStep:^{
             [self request];
     }];
-    self.tableView.footer = [RefreshFooter footerWithNetStep:^{
+    self.tableView.footer = [RefreshFooter footerWithNextStep:^{
             [self request];
     }];
 //case collectionView
-   self.collectionView.header = [RefreshHeader headerWithNetStep:^{
+   self.collectionView.header = [RefreshHeader headerWithNextStep:^{
             [self request];
     }];
-    self.collectionView.footer = [RefreshFooter footerWithNetStep:^{
+    self.collectionView.footer = [RefreshFooter footerWithNextStep:^{
             [self request];
     }];
 ```
