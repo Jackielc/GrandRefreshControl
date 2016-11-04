@@ -31,15 +31,14 @@
 - (void)afterMoveToSuperview
 {
     [super afterMoveToSuperview];
-    self.frame = CGRectMake(0, self.scrollView.contentSize.height+RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
+    self.frame = CGRectMake(0, self.scrollView.contentSize.height, self.scrollView.frame.size.width, RefreshControlContentHeight);
     self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
 }
 
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-
-        if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset&&y>0)
+        if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset&& y>RefreshControlContentInset)
         {
             [self refreshControlWillEnterRefreshState];
             if (!dragging) {

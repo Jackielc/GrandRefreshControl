@@ -8,7 +8,7 @@
 
 #import "RefreshControlElement.h"
 const CGFloat RefreshControlContentHeight       = 40;
-const CGFloat RefreshControlContentInset        = 60;
+const CGFloat RefreshControlContentInset        = 80;
 const CGFloat RefreshArrowImageWidth            = 15;
 const CGFloat RefreshAnimationDuration          = 0.3f;
 const CGFloat RefreshTimeIntervalDuration       = 0.1f;

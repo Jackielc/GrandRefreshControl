@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Item 1-->
+        <!--CollectionViewController-->
         <scene sceneID="5Cv-9t-1J6">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="w99-Zt-Pmb" customClass="CollectionViewController" sceneMemberID="viewController">
+                <viewController title="CollectionViewController" automaticallyAdjustsScrollViewInsets="NO" id="w99-Zt-Pmb" userLabel="CollectionViewController" customClass="CollectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6tQ-ZQ-dr3"/>
                         <viewControllerLayoutGuide type="bottom" id="sgJ-Im-aLy"/>
@@ -19,7 +19,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xRq-jS-x6G">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dtY-Nn-ZiQ">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dtY-Nn-ZiQ">
                                     <size key="itemSize" width="162" height="131"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -63,14 +63,34 @@
                             <constraint firstAttribute="trailing" secondItem="xRq-jS-x6G" secondAttribute="trailing" id="fiE-I5-pKX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="aX5-uX-YYf"/>
+                    <tabBarItem key="tabBarItem" title="CollectionViewController" id="aX5-uX-YYf"/>
                     <connections>
                         <outlet property="collectionView" destination="xRq-jS-x6G" id="h9R-8v-hz8"/>
+                        <segue destination="1N6-rk-12Q" kind="push" identifier="push" id="Cbl-nh-gQP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYo-yR-FAM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-996" y="-232"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="15k-AC-4nf">
+            <objects>
+                <viewController id="1N6-rk-12Q" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IJz-iH-XQY"/>
+                        <viewControllerLayoutGuide type="bottom" id="hOA-Fc-dEV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MZG-SB-4xa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fqj-OL-NRs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUe-RW-NYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-252" y="-232"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Kv6-H9-kAB">
@@ -91,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="-1900" y="503"/>
         </scene>
-        <!--Item-->
+        <!--TableViewController-->
         <scene sceneID="KE4-4r-Oaw">
             <objects>
-                <viewController id="ld4-Kq-txe" customClass="TableViewController" sceneMemberID="viewController">
+                <viewController title="TableViewController" id="ld4-Kq-txe" userLabel="TableViewController" customClass="TableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bme-5X-RgZ"/>
                         <viewControllerLayoutGuide type="bottom" id="qJp-gf-n3O"/>
@@ -143,7 +163,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="mik-3f-M5n"/>
+                    <tabBarItem key="tabBarItem" title="TableViewController" id="mik-3f-M5n"/>
                     <connections>
                         <outlet property="tableView" destination="xRo-Wt-CG3" id="ngv-2v-S20"/>
                         <segue destination="jxG-4e-jmF" kind="push" identifier="push" id="KXt-p5-f6X"/>

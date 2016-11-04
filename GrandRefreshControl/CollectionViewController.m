@@ -9,7 +9,7 @@
 #import "CollectionViewController.h"
 #import "RefreshControl.h"
 
-@interface CollectionViewController ()
+@interface CollectionViewController ()<UICollectionViewDelegate>
 @property (nonatomic,weak)IBOutlet UICollectionView *collectionView;
 
 @end
@@ -23,17 +23,30 @@
     layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width/4 , [UIScreen mainScreen].bounds.size.width/4);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.collectionView.collectionViewLayout = layout;
-    self.collectionView.backgroundColor = [UIColor clearColor];
-    self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
-    self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+        self.collectionView.header = [RefreshHeader headerWithNetStep:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.collectionView.header endRefresh];
+            });
+        }];
+        self.collectionView.footer = [RefreshFooter footerWithNetStep:^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.collectionView.footer endRefresh];
+            });
+        }];
+    
+//    
+//    self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
+//    self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
 
 - (void)nslog
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.collectionView.header endRefresh];
     });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.collectionView.footer endRefresh];
     });
 }
@@ -54,6 +67,12 @@
         cell = [[UICollectionViewCell alloc]init];
     }
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    [self performSegueWithIdentifier:@"push" sender:nil];
 }
 
 
