@@ -16,7 +16,6 @@
 + (RefreshHeader *)headerWithNetStep:(void(^)())next
 {
     RefreshHeader *header = [[self alloc]init];
-    header.refreshStyle = RefreshHeaderStyle;
     header.headerHandle = next;
     return header;
 }
@@ -24,10 +23,15 @@
 + (RefreshHeader *)headerWithTarget:(id)target NextAction:(SEL)action
 {
     RefreshHeader *header = [[self alloc]init];
-    header.refreshStyle = RefreshHeaderStyle;
     header.refreshTarget = target;
     header.refreshAction = action;
     return header;
+}
+
+- (void)afterMoveToSuperview
+{
+    [super afterMoveToSuperview];
+    self.frame = CGRectMake(0, -RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
 }
 
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
@@ -41,7 +45,6 @@
         return;
     }
     [self refreshControlWillQuitRefreshState];
-
 }
 
 - (void)refreshControlRefreshing

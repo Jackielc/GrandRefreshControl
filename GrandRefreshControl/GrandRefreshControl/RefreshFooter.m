@@ -16,7 +16,6 @@
 + (RefreshFooter *)footerWithNetStep:(void(^)())next
 {
     RefreshFooter *footer = [[self alloc]init];
-    footer.refreshStyle = RefreshFooterStyle;
     footer.footerHandle = next;
     return footer;
 }
@@ -24,10 +23,16 @@
 + (RefreshFooter *)footerWithTarget:(id)target NextAction:(SEL)action
 {
     RefreshFooter *footer = [[self alloc]init];
-    footer.refreshStyle = RefreshFooterStyle;
     footer.refreshTarget = target;
     footer.refreshAction = action;
     return footer;
+}
+
+- (void)afterMoveToSuperview
+{
+    [super afterMoveToSuperview];
+    self.frame = CGRectMake(0, self.scrollView.contentSize.height+RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
+    self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
 }
 
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
@@ -44,6 +49,21 @@
         }
         [self refreshControlWillQuitRefreshState];
     });
+}
+
+- (void)refreshControlWillQuitRefreshState
+{
+    [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+        self.isRefreshing = NO;
+        self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
+    }];
+}
+
+- (void)refreshControlWillEnterRefreshState
+{
+   [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+       self.arrow.transform = CGAffineTransformMakeRotation(0);
+   }];
 }
 
 - (void)refreshControlRefreshing

@@ -20,16 +20,18 @@ UIKIT_EXTERN const CGFloat RefreshTimeIntervalDuration;
 typedef void (^NextStepHandle)();
 
 typedef enum : NSUInteger {
-    RefreshHeaderStyle = 0,
-    RefreshFooterStyle = 1
-} RefreshStyle;
+    
+    RefreshControlStateWillBeRefeshing,
+    RefreshControlStateRefreshing,
+    RefreshControlStateWillBeFree,
+    RefreshControlStateFree
+} RefreshState;
 
 @interface RefreshControlElement : UIView
-@property (nonatomic,weak)UIScrollView *scrollView;
-@property (nonatomic,strong)UIImageView *arrow;
+@property (nonatomic,weak)   UIScrollView *scrollView;
+@property (nonatomic,strong) UIImageView *arrow;
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 
-@property (nonatomic,assign)BOOL otherIsRefreshing;
 @property (nonatomic,assign)BOOL isRefreshing;
 
 @property (nonatomic,copy)NextStepHandle headerHandle;
@@ -38,7 +40,7 @@ typedef enum : NSUInteger {
 @property (nonatomic,weak)id refreshTarget;
 @property (nonatomic,assign)SEL refreshAction;
 
-@property (nonatomic,assign)RefreshStyle refreshStyle;
+@property (nonatomic,assign)RefreshState refreshStyle;
 
 - (void)refreshControlWillEnterRefreshState;//即将进入刷新状态
 - (void)refreshControlRefreshing;//正在刷新
@@ -46,4 +48,6 @@ typedef enum : NSUInteger {
 - (void)refreshControlWillQuitRefreshState;//不满足刷新状态／退出刷新状态
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging;
 - (void)endRefresh;
+
+- (void)afterMoveToSuperview;
 @end
