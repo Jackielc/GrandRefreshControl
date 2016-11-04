@@ -12,6 +12,9 @@
 @end
 
 @implementation RefreshFooter
+{
+    CGFloat superViewLastContentHeight;
+}
 
 + (RefreshFooter *)footerWithNetStep:(void(^)())next
 {
@@ -30,12 +33,12 @@
 
 - (void)afterMoveToSuperview
 {
-    [super afterMoveToSuperview];
+    [super afterMoveToSuperview];    
     self.frame = CGRectMake(0, self.scrollView.contentSize.height, self.scrollView.frame.size.width, RefreshControlContentHeight);
     self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
 }
 
-- (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
+- (void)refreshControlContentOffsetDidChange:(CGFloat)y isDragging:(BOOL)dragging
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset&& y>RefreshControlContentInset)
@@ -50,9 +53,20 @@
     });
 }
 
+- (void)refreshControlContentSizeDidChange:(CGFloat)height
+{
+    if (superViewLastContentHeight == height) {
+        return;
+    }
+    CGRect rect = self.frame;
+    rect.origin.y = height;
+    self.frame = rect;
+    superViewLastContentHeight = height;
+}
+
 - (void)refreshControlWillQuitRefreshState
 {
-    [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+    [UIView animateWithDuration:RefreshControlAnimationDuration animations:^{
         self.isRefreshing = NO;
         self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
     }];
@@ -60,7 +74,7 @@
 
 - (void)refreshControlWillEnterRefreshState
 {
-   [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+   [UIView animateWithDuration:RefreshControlAnimationDuration animations:^{
        self.arrow.transform = CGAffineTransformMakeRotation(0);
    }];
 }
@@ -68,7 +82,7 @@
 - (void)refreshControlRefreshing
 {
     [super refreshControlRefreshing];
-    [UIView animateWithDuration:RefreshTimeIntervalDuration animations:^{
+    [UIView animateWithDuration:RefreshControlTimeIntervalDuration animations:^{
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, RefreshControlContentInset, 0);
     }];
     self.arrow.hidden = YES;

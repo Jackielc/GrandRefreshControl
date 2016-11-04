@@ -14,13 +14,13 @@
 		047C85391DCAC3FC002BDEC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047C85371DCAC3FC002BDEC3 /* LaunchScreen.storyboard */; };
 		047C85441DCAC3FC002BDEC3 /* GrandRefreshControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C85431DCAC3FC002BDEC3 /* GrandRefreshControlTests.m */; };
 		047C854F1DCAC3FC002BDEC3 /* GrandRefreshControlUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C854E1DCAC3FC002BDEC3 /* GrandRefreshControlUITests.m */; };
-		047C85611DCAC627002BDEC3 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047C85601DCAC627002BDEC3 /* arrow@2x.png */; };
 		047C856A1DCAD710002BDEC3 /* UIScrollView+RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C85691DCAD710002BDEC3 /* UIScrollView+RefreshControl.m */; };
 		047C856D1DCADEE0002BDEC3 /* RefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C856C1DCADEE0002BDEC3 /* RefreshFooter.m */; };
 		047C85701DCADEEC002BDEC3 /* RefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C856F1DCADEEC002BDEC3 /* RefreshHeader.m */; };
 		047C85731DCB1041002BDEC3 /* RefreshControlElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 047C85721DCB1041002BDEC3 /* RefreshControlElement.m */; };
 		04A376C81DCC3797006DDC4D /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A376C71DCC3797006DDC4D /* TableViewController.m */; };
 		04A376CB1DCC37A9006DDC4D /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A376CA1DCC37A9006DDC4D /* CollectionViewController.m */; };
+		04A376CE1DCC6866006DDC4D /* RefreshControl.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04A376CD1DCC6866006DDC4D /* RefreshControl.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,6 @@
 		047C854A1DCAC3FC002BDEC3 /* GrandRefreshControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrandRefreshControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		047C854E1DCAC3FC002BDEC3 /* GrandRefreshControlUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GrandRefreshControlUITests.m; sourceTree = "<group>"; };
 		047C85501DCAC3FC002BDEC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		047C85601DCAC627002BDEC3 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		047C85681DCAD710002BDEC3 /* UIScrollView+RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+RefreshControl.h"; sourceTree = "<group>"; };
 		047C85691DCAD710002BDEC3 /* UIScrollView+RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+RefreshControl.m"; sourceTree = "<group>"; };
 		047C856B1DCADEE0002BDEC3 /* RefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshFooter.h; sourceTree = "<group>"; };
@@ -69,6 +68,8 @@
 		04A376C71DCC3797006DDC4D /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = GrandRefreshControl/TableViewController.m; sourceTree = "<group>"; };
 		04A376C91DCC37A9006DDC4D /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		04A376CA1DCC37A9006DDC4D /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		04A376CC1DCC6789006DDC4D /* RefreshControlConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RefreshControlConst.h; sourceTree = "<group>"; };
+		04A376CD1DCC6866006DDC4D /* RefreshControl.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RefreshControl.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +100,6 @@
 		047C851D1DCAC3FC002BDEC3 = {
 			isa = PBXGroup;
 			children = (
-				047C85601DCAC627002BDEC3 /* arrow@2x.png */,
 				047C85281DCAC3FC002BDEC3 /* GrandRefreshControl */,
 				047C85421DCAC3FC002BDEC3 /* GrandRefreshControlTests */,
 				047C854D1DCAC3FC002BDEC3 /* GrandRefreshControlUITests */,
@@ -165,15 +165,17 @@
 		047C855C1DCAC4B8002BDEC3 /* GrandRefreshControl */ = {
 			isa = PBXGroup;
 			children = (
+				04A376C51DCC34C0006DDC4D /* RefreshControl.h */,
 				047C85681DCAD710002BDEC3 /* UIScrollView+RefreshControl.h */,
 				047C85691DCAD710002BDEC3 /* UIScrollView+RefreshControl.m */,
-				047C856B1DCADEE0002BDEC3 /* RefreshFooter.h */,
-				047C856C1DCADEE0002BDEC3 /* RefreshFooter.m */,
-				047C856E1DCADEEC002BDEC3 /* RefreshHeader.h */,
-				047C856F1DCADEEC002BDEC3 /* RefreshHeader.m */,
 				047C85711DCB1041002BDEC3 /* RefreshControlElement.h */,
 				047C85721DCB1041002BDEC3 /* RefreshControlElement.m */,
-				04A376C51DCC34C0006DDC4D /* RefreshControl.h */,
+				047C856E1DCADEEC002BDEC3 /* RefreshHeader.h */,
+				047C856F1DCADEEC002BDEC3 /* RefreshHeader.m */,
+				047C856B1DCADEE0002BDEC3 /* RefreshFooter.h */,
+				047C856C1DCADEE0002BDEC3 /* RefreshFooter.m */,
+				04A376CC1DCC6789006DDC4D /* RefreshControlConst.h */,
+				04A376CD1DCC6866006DDC4D /* RefreshControl.xcassets */,
 			);
 			path = GrandRefreshControl;
 			sourceTree = "<group>";
@@ -282,8 +284,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				047C85611DCAC627002BDEC3 /* arrow@2x.png in Resources */,
 				047C85391DCAC3FC002BDEC3 /* LaunchScreen.storyboard in Resources */,
+				04A376CE1DCC6866006DDC4D /* RefreshControl.xcassets in Resources */,
 				047C85361DCAC3FC002BDEC3 /* Assets.xcassets in Resources */,
 				047C85341DCAC3FC002BDEC3 /* Main.storyboard in Resources */,
 			);

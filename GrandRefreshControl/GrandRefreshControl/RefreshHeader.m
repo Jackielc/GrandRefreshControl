@@ -34,7 +34,7 @@
     self.frame = CGRectMake(0, -RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
 }
 
-- (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
+- (void)refreshControlContentOffsetDidChange:(CGFloat)y isDragging:(BOOL)dragging
 {
     if (y< -RefreshControlContentInset&&y<0)
     {
@@ -50,7 +50,7 @@
 - (void)refreshControlRefreshing
 {
     [super refreshControlRefreshing];
-    [UIView animateWithDuration:RefreshTimeIntervalDuration animations:^{
+    [UIView animateWithDuration:RefreshControlTimeIntervalDuration animations:^{
         self.scrollView.contentInset = UIEdgeInsetsMake(RefreshControlContentInset, 0, 0, 0);
     }];
     self.arrow.hidden = YES;

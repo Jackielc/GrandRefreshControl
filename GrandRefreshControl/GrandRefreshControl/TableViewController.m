@@ -11,7 +11,7 @@
 
 @interface TableViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic,assign)NSInteger rows;
 @end
 
 @implementation TableViewController
@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.rows = 5;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
         self.tableView.header = [RefreshHeader headerWithNetStep:^{
@@ -31,7 +32,10 @@
                 [self.tableView.footer endRefresh];
             });
         }];
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.rows = 30;
+        [self.tableView reloadData];
+    });
 //    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
 //    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
@@ -48,7 +52,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return self.rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

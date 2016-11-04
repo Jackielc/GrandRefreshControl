@@ -7,11 +7,14 @@
 //
 
 #import "RefreshControlElement.h"
+#import "RefreshControlConst.h"
+
 const CGFloat RefreshControlContentHeight       = 40;
 const CGFloat RefreshControlContentInset        = 80;
-const CGFloat RefreshArrowImageWidth            = 15;
-const CGFloat RefreshAnimationDuration          = 0.3f;
-const CGFloat RefreshTimeIntervalDuration       = 0.1f;
+const CGFloat RefreshControlArrowImageWidth            = 15;
+const CGFloat RefreshControlAnimationDuration          = 0.3f;
+const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
+
 
 @implementation RefreshControlElement
 
@@ -23,7 +26,8 @@ const CGFloat RefreshTimeIntervalDuration       = 0.1f;
         ((UICollectionView *)newSuperview).alwaysBounceVertical = YES;
     }
     self.scrollView = (UIScrollView *)newSuperview;
-    [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentOffset options:NSKeyValueObservingOptionNew context:nil];
+    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentSize options:NSKeyValueObservingOptionNew context:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self afterMoveToSuperview];
     });
@@ -32,7 +36,7 @@ const CGFloat RefreshTimeIntervalDuration       = 0.1f;
 - (void)afterMoveToSuperview
 {
     _arrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow"]];
-    _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshArrowImageWidth)/2, 0, RefreshArrowImageWidth, RefreshControlContentHeight);
+    _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshControlArrowImageWidth)/2, 0, RefreshControlArrowImageWidth, RefreshControlContentHeight);
     [self addSubview:_arrow];
 }
 
@@ -49,8 +53,11 @@ const CGFloat RefreshTimeIntervalDuration       = 0.1f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"contentOffset"]) {
-        [self refreshControlContentOffsetChange:([change[@"new"] CGPointValue].y) isDragging:self.scrollView.isDragging];
+    if ([keyPath isEqualToString:RefreshControlObserverKeyPathContentOffset]) {
+        [self refreshControlContentOffsetDidChange:([change[@"new"] CGPointValue].y) isDragging:self.scrollView.isDragging];
+    }
+    if ([keyPath isEqualToString:RefreshControlObserverKeyPathContentSize]) {
+        [self refreshControlContentSizeDidChange:([change[@"new"] CGSizeValue].height)];
     }
 }
 
@@ -67,20 +74,21 @@ const CGFloat RefreshTimeIntervalDuration       = 0.1f;
 
 - (void)refreshControlWillEnterRefreshState
 {
-    [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+    [UIView animateWithDuration:RefreshControlAnimationDuration animations:^{
         self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
     }];
 }
 
 - (void)refreshControlWillQuitRefreshState
 {
-    [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+    [UIView animateWithDuration:RefreshControlAnimationDuration animations:^{
         self.isRefreshing = NO;
         self.arrow.transform = CGAffineTransformMakeRotation(0);
     }];
 }
 
-- (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging{}
+- (void)refreshControlContentOffsetDidChange:(CGFloat)y isDragging:(BOOL)dragging{}
+- (void)refreshControlContentSizeDidChange:(CGFloat)height{}
 - (void)refreshControlRefreshing
 {
     if (self.isRefreshing) {
