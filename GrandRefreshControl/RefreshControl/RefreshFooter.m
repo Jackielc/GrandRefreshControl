@@ -23,7 +23,7 @@
     return footer;
 }
 
-+ (RefreshFooter *)footerWithTarget:(id)target NextAction:(SEL)action
++ (RefreshFooter *)footerWithTarget:(id)target nextAction:(SEL)action
 {
     RefreshFooter *footer = [[self alloc]init];
     footer.refreshTarget = target;

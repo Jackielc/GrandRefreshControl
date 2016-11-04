@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.rows = 5;
+    self.rows = 25;
 
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width/4 , [UIScreen mainScreen].bounds.size.width/4);
@@ -38,14 +38,13 @@
                 [self.collectionView.footer endRefresh];
             });
         }];
-    
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        self.rows = 30;
 //        [self.collectionView reloadData];
 //    });
     
-//    self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
-//    self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
+//    self.collectionView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(nslog)];
+//    self.collectionView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(nslog)];
 }
 
 - (void)nslog

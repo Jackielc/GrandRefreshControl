@@ -11,5 +11,5 @@
 
 @interface RefreshFooter : RefreshControlElement
 + (RefreshFooter *)footerWithNextStep:(void(^)())next;
-+ (RefreshFooter *)footerWithTarget:(id)target NextAction:(SEL)action;
++ (RefreshFooter *)footerWithTarget:(id)target nextAction:(SEL)action;
 @end

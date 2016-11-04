@@ -20,7 +20,7 @@
     return header;
 }
 
-+ (RefreshHeader *)headerWithTarget:(id)target NextAction:(SEL)action
++ (RefreshHeader *)headerWithTarget:(id)target nextAction:(SEL)action
 {
     RefreshHeader *header = [[self alloc]init];
     header.refreshTarget = target;

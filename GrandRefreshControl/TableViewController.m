@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.rows = 5;
+    self.rows = 25;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
 //        self.tableView.header = [RefreshHeader headerWithNextStep:^{
@@ -37,8 +37,8 @@
 //        [self.tableView reloadData];
 //    });
     
-    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
-    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
+    self.tableView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(nslog)];
+    self.tableView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(nslog)];
 }
 
 - (void)request{};

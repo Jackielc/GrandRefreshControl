@@ -11,5 +11,5 @@
 
 @interface RefreshHeader : RefreshControlElement
 + (RefreshHeader *)headerWithNextStep:(void(^)())next;
-+ (RefreshHeader *)headerWithTarget:(id)target NextAction:(SEL)action;
++ (RefreshHeader *)headerWithTarget:(id)target nextAction:(SEL)action;
 @end
