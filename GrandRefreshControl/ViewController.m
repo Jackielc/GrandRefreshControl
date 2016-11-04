@@ -33,6 +33,7 @@
 //        });
 //    }];
     
+    
     self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
     self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
@@ -49,7 +50,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 15;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -51,6 +51,7 @@ const CGFloat RefreshTimeIntervalDuration       = 0.1f;
 {
     if ([keyPath isEqualToString:@"contentOffset"]) {
         [self refreshControlContentOffsetChange:([change[@"new"] CGPointValue].y) isDragging:self.scrollView.isDragging];
+        NSLog(@"y===%f",([change[@"new"] CGPointValue].y));
     }
 }
 

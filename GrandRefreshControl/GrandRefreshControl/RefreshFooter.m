@@ -34,7 +34,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
 
-        if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset||self.scrollView.contentSize.height <= self.scrollView.frame.size.height)
+        if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset&&y>0)
         {
             [self refreshControlWillEnterRefreshState];
             if (!dragging) {
