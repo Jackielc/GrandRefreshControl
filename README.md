@@ -5,18 +5,18 @@
 主要是实现一个思路，没什么技术难点
 ---
 
-UITableView、UICollectionView
+导入
 ---
 
 ```objective-c
 #import "GrandRefreshControl.h"
 ```
 实现了两种刷新响应方式
+===
+
+方法选择器
 ---
 ```objective-c
-
-// 方法选择器
-
 //case tableView
     self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
     self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
@@ -24,9 +24,10 @@ UITableView、UICollectionView
 //case collectionView
     self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
     self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
-
-// 传统的block方式
-
+```
+闭包
+---
+```objective-c
 //case tableView
     self.tableView.header = [RefreshHeader headerWithNetStep:^{
             [self request];
