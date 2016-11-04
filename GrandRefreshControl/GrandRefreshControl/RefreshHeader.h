@@ -10,5 +10,6 @@
 #import "RefreshControlElement.h"
 
 @interface RefreshHeader : RefreshControlElement
-+ (RefreshHeader *)HeaderWithNetStep:(void(^)())next;
++ (RefreshHeader *)headerWithNetStep:(void(^)())next;
++ (RefreshHeader *)headerWithTarget:(id)target NextAction:(SEL)action;
 @end

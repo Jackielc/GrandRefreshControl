@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#define RefreshMsgSend(...) ((void (*)(void *, SEL, UIView *))objc_msgSend)(__VA_ARGS__)
+#define RefreshMsgTarget(target) (__bridge void *)(target)
+
 UIKIT_EXTERN const CGFloat RefreshControlContentHeight;
 UIKIT_EXTERN const CGFloat RefreshControlContentInset;
 UIKIT_EXTERN const CGFloat RefreshAnimationDuration;
 UIKIT_EXTERN const CGFloat RefreshArrowImageWidth;
-
+UIKIT_EXTERN const CGFloat RefreshTimeIntervalDuration;
 
 typedef void (^NextStepHandle)();
 
@@ -27,9 +30,13 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 
 @property (nonatomic,assign)BOOL otherIsRefreshing;
+@property (nonatomic,assign)BOOL isRefreshing;
 
 @property (nonatomic,copy)NextStepHandle headerHandle;
 @property (nonatomic,copy)NextStepHandle footerHandle;
+
+@property (nonatomic,weak)id refreshTarget;
+@property (nonatomic,assign)SEL refreshAction;
 
 @property (nonatomic,assign)RefreshStyle refreshStyle;
 

@@ -12,7 +12,7 @@
 
 - (void)setHeader:(RefreshHeader *)header
 {
-    [self addSubview:header];
+    [self insertSubview:header atIndex:0];
     objc_setAssociatedObject(self, @selector(header), header, OBJC_ASSOCIATION_ASSIGN);
 }
 
@@ -23,7 +23,7 @@
 
 - (void)setFooter:(RefreshFooter *)footer
 {
-    [self addSubview:footer];
+    [self insertSubview:footer atIndex:0];
     objc_setAssociatedObject(self, @selector(footer), footer, OBJC_ASSOCIATION_ASSIGN);
 }
 

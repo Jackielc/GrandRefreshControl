@@ -21,10 +21,20 @@
     return footer;
 }
 
++ (RefreshFooter *)footerWithTarget:(id)target NextAction:(SEL)action
+{
+    RefreshFooter *footer = [[self alloc]init];
+    footer.refreshStyle = RefreshFooterStyle;
+    footer.refreshTarget = target;
+    footer.refreshAction = action;
+    return footer;
+}
+
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (y>=self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset)
+
+        if (y >= self.scrollView.contentSize.height - self.scrollView.frame.size.height + RefreshControlContentInset||self.scrollView.contentSize.height <= self.scrollView.frame.size.height)
         {
             [self refreshControlWillEnterRefreshState];
             if (!dragging) {
@@ -39,7 +49,7 @@
 - (void)refreshControlRefreshing
 {
     [super refreshControlRefreshing];
-    [UIView animateWithDuration:0.1f animations:^{
+    [UIView animateWithDuration:RefreshTimeIntervalDuration animations:^{
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, RefreshControlContentInset, 0);
     }];
     self.arrow.hidden = YES;

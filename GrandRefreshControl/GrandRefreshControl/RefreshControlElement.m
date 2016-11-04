@@ -11,6 +11,7 @@ const CGFloat RefreshControlContentHeight       = 40;
 const CGFloat RefreshControlContentInset        = 80;
 const CGFloat RefreshArrowImageWidth            = 15;
 const CGFloat RefreshAnimationDuration          = 0.3f;
+const CGFloat RefreshTimeIntervalDuration       = 0.1f;
 
 @implementation RefreshControlElement
 
@@ -20,19 +21,19 @@ const CGFloat RefreshAnimationDuration          = 0.3f;
     self.scrollView = (UIScrollView *)newSuperview;
     [self.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     _arrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow"]];
-    _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshArrowImageWidth)/2, 0, RefreshArrowImageWidth, RefreshControlContentHeight);
-    [self addSubview:_arrow];
-    switch (self.refreshStyle) {
-        case RefreshFooterStyle:{
-            dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshArrowImageWidth)/2, 0, RefreshArrowImageWidth, RefreshControlContentHeight);
+        [self addSubview:_arrow];
+        switch (self.refreshStyle) {
+            case RefreshFooterStyle:{
                 self.frame = CGRectMake(0, self.scrollView.contentSize.height+RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
-            });
+            }
+                break;
+            default:
+                self.frame = CGRectMake(0, -RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
+                break;
         }
-            break;
-        default:
-            self.frame = CGRectMake(0, -RefreshControlContentHeight, self.scrollView.frame.size.width, RefreshControlContentHeight);
-            break;
-    }
+    });
 }
 
 - (UIActivityIndicatorView *)activity
@@ -73,6 +74,7 @@ const CGFloat RefreshAnimationDuration          = 0.3f;
 - (void)refreshControlWillQuitRefreshState
 {
     [UIView animateWithDuration:RefreshAnimationDuration animations:^{
+        self.isRefreshing = NO;
         self.arrow.transform = CGAffineTransformMakeRotation(0);
     }];
 }
@@ -80,8 +82,19 @@ const CGFloat RefreshAnimationDuration          = 0.3f;
 - (void)refreshControlContentOffsetChange:(CGFloat)y isDragging:(BOOL)dragging{}
 - (void)refreshControlRefreshing
 {
-    if (self.headerHandle) self.headerHandle();
-    if (self.footerHandle) self.footerHandle();
+    
+    if (self.isRefreshing) {
+        return;
+    }
+    self.isRefreshing = YES;
+
+    if (self.refreshAction && self.refreshTarget){
+        [self.refreshTarget performSelector:self.refreshAction];
+    }
+    else{
+      if (self.headerHandle) self.headerHandle();
+      if (self.footerHandle) self.footerHandle();
+    }
     [self.activity startAnimating];
 }//正在刷新
 - (void)canRefreshAndNotDragging{}//松手并达到刷新状态

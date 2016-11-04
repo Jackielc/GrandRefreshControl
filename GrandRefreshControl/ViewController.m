@@ -20,26 +20,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.header = [RefreshHeader HeaderWithNetStep:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableView.header endRefresh];
-        });
-    }];
-    self.tableView.footer = [RefreshFooter footerWithNetStep:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.tableView.footer endRefresh];
-        });
-    }];
+    self.tableView.tableFooterView = [[UIView alloc]init];
+    
+//    self.tableView.header = [RefreshHeader headerWithNetStep:^{
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.tableView.header endRefresh];
+//        });
+//    }];
+//    self.tableView.footer = [RefreshFooter footerWithNetStep:^{
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.tableView.footer endRefresh];
+//        });
+//    }];
+    
+    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
+    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
 
 - (void)nslog
 {
-    NSLog(@"2");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.header endRefresh];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.tableView.footer endRefresh];
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return 15;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
