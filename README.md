@@ -17,8 +17,8 @@
 ###tableView
 ```objective-c
 //case tableView
-    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(request)];
-    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(request)];
+    self.tableView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(request)];
+    self.tableView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(request)];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self.tableView.header endRefresh];
@@ -27,8 +27,8 @@
 ```
 ###collectionView
 ```objective-c
-    self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(request)];
-    self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(request)];
+    self.collectionView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(request)];
+    self.collectionView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(request)];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
           [self.collectionView.header endRefresh];
