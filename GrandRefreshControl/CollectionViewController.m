@@ -7,10 +7,11 @@
 //
 
 #import "CollectionViewController.h"
-#import "RefreshControl.h"
+#import "GrandRefreshControl.h"
 
 @interface CollectionViewController ()<UICollectionViewDelegate>
 @property (nonatomic,weak)IBOutlet UICollectionView *collectionView;
+@property (nonatomic,assign)NSInteger rows;
 
 @end
 
@@ -19,24 +20,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.rows = 5;
+
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width/4 , [UIScreen mainScreen].bounds.size.width/4);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     self.collectionView.collectionViewLayout = layout;
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-        self.collectionView.header = [RefreshHeader headerWithNetStep:^{
+        self.collectionView.header = [RefreshHeader headerWithNextStep:^{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.collectionView.header endRefresh];
             });
         }];
-        self.collectionView.footer = [RefreshFooter footerWithNetStep:^{
+        self.collectionView.footer = [RefreshFooter footerWithNextStep:^{
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.collectionView.footer endRefresh];
             });
         }];
     
-//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.rows = 30;
+//        [self.collectionView reloadData];
+//    });
+    
 //    self.collectionView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
 //    self.collectionView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
@@ -57,7 +64,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 10;
+    return _rows;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

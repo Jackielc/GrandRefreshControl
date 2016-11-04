@@ -26,11 +26,12 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
         ((UICollectionView *)newSuperview).alwaysBounceVertical = YES;
     }
     self.scrollView = (UIScrollView *)newSuperview;
-    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentOffset options:NSKeyValueObservingOptionNew context:nil];
-    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentSize options:NSKeyValueObservingOptionNew context:nil];
+    [self removeObservers];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self afterMoveToSuperview];
     });
+    [self addObservers];
 }
 
 - (void)afterMoveToSuperview
@@ -53,6 +54,8 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
+    if (!self.isUserInteractionEnabled) return;
+    if (self.hidden) return;
     if ([keyPath isEqualToString:RefreshControlObserverKeyPathContentOffset]) {
         [self refreshControlContentOffsetDidChange:([change[@"new"] CGPointValue].y) isDragging:self.scrollView.isDragging];
     }
@@ -85,6 +88,18 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
         self.isRefreshing = NO;
         self.arrow.transform = CGAffineTransformMakeRotation(0);
     }];
+}
+
+- (void)addObservers
+{
+    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentOffset options:NSKeyValueObservingOptionNew context:nil];
+    [self.scrollView addObserver:self forKeyPath:RefreshControlObserverKeyPathContentSize options:NSKeyValueObservingOptionNew context:nil];
+}
+
+- (void)removeObservers
+{
+    [self.superview removeObserver:self forKeyPath:RefreshControlObserverKeyPathContentSize];
+    [self.superview removeObserver:self forKeyPath:RefreshControlObserverKeyPathContentOffset];
 }
 
 - (void)refreshControlContentOffsetDidChange:(CGFloat)y isDragging:(BOOL)dragging{}

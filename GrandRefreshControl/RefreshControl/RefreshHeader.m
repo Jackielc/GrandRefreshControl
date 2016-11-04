@@ -13,7 +13,7 @@
 
 @implementation RefreshHeader
 
-+ (RefreshHeader *)headerWithNetStep:(void(^)())next
++ (RefreshHeader *)headerWithNextStep:(void(^)())next
 {
     RefreshHeader *header = [[self alloc]init];
     header.headerHandle = next;

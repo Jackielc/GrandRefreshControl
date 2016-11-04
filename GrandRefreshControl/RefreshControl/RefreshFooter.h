@@ -10,6 +10,6 @@
 #import "RefreshControlElement.h"
 
 @interface RefreshFooter : RefreshControlElement
-+ (RefreshFooter *)footerWithNetStep:(void(^)())next;
++ (RefreshFooter *)footerWithNextStep:(void(^)())next;
 + (RefreshFooter *)footerWithTarget:(id)target NextAction:(SEL)action;
 @end

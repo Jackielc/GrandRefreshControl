@@ -16,7 +16,7 @@
     CGFloat superViewLastContentHeight;
 }
 
-+ (RefreshFooter *)footerWithNetStep:(void(^)())next
++ (RefreshFooter *)footerWithNextStep:(void(^)())next
 {
     RefreshFooter *footer = [[self alloc]init];
     footer.footerHandle = next;
@@ -33,7 +33,7 @@
 
 - (void)afterMoveToSuperview
 {
-    [super afterMoveToSuperview];    
+    [super afterMoveToSuperview];
     self.frame = CGRectMake(0, self.scrollView.contentSize.height, self.scrollView.frame.size.width, RefreshControlContentHeight);
     self.arrow.transform = CGAffineTransformMakeRotation(M_PI);
 }
