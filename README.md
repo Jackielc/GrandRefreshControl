@@ -37,8 +37,9 @@
 ```
 闭包
 ---
+
+### tableView
 ```objective-c
-//case tableView
     self.tableView.header = [RefreshHeader headerWithNextStep:^{
           [self request];
     }];
@@ -50,7 +51,9 @@
           [self.tableView.header endRefresh];
           [self.tableView.footer endRefresh];
     });
-//case collectionView
+```
+###collectionView
+```objective-c
    self.collectionView.header = [RefreshHeader headerWithNextStep:^{
             [self request];
     }];
