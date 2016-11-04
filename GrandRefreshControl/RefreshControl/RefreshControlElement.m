@@ -8,6 +8,7 @@
 
 #import "RefreshControlElement.h"
 #import "RefreshControlConst.h"
+#import <objc/message.h>
 
 const CGFloat RefreshControlContentHeight       = 40;
 const CGFloat RefreshControlContentInset        = 80;
@@ -34,9 +35,11 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
     [self addObservers];
 }
 
+
 - (void)afterMoveToSuperview
 {
     _arrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow"]];
+    #warning console will input 'error Two-stage rotation animation is deprecated' when rotate arrow. Because this application should use the smoother single-stage animation.that I was simply using the Tab Bar Controller wrong: the tab bar should only be used as a root controller, however I inserted a navigation controller before it.
     _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshControlArrowImageWidth)/2, 0, RefreshControlArrowImageWidth, RefreshControlContentHeight);
     [self addSubview:_arrow];
 }
@@ -111,8 +114,9 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
     }
     self.isRefreshing = YES;
 
-    if (self.refreshAction && self.refreshTarget){
+    if (self.refreshAction && self.refreshTarget&&[self.refreshTarget respondsToSelector:self.refreshAction]){
         [self.refreshTarget performSelector:self.refreshAction];
+        RefreshMsgSend(RefreshMsgTarget(self.refreshTarget), self.refreshAction, self);
     }
     else{
       if (self.headerHandle) self.headerHandle();

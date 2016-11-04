@@ -22,23 +22,23 @@
     self.rows = 5;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
-        self.tableView.header = [RefreshHeader headerWithNextStep:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.tableView.header endRefresh];
-            });
-        }];
-        self.tableView.footer = [RefreshFooter footerWithNextStep:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.tableView.footer endRefresh];
-            });
-        }];
+//        self.tableView.header = [RefreshHeader headerWithNextStep:^{
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self.tableView.header endRefresh];
+//            });
+//        }];
+//        self.tableView.footer = [RefreshFooter footerWithNextStep:^{
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self.tableView.footer endRefresh];
+//            });
+//        }];
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        self.rows = 30;
 //        [self.tableView reloadData];
 //    });
     
-//    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
-//    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
+    self.tableView.header = [RefreshHeader headerWithTarget:self NextAction:@selector(nslog)];
+    self.tableView.footer = [RefreshFooter footerWithTarget:self NextAction:@selector(nslog)];
 }
 
 - (void)request{};
