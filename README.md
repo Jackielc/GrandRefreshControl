@@ -16,7 +16,6 @@
 
 ###tableView
 ```objective-c
-//case tableView
     self.tableView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(request)];
     self.tableView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(request)];
     
