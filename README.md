@@ -48,10 +48,11 @@
           [self request];
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-          [self.tableView.header endRefresh];
-          [self.tableView.footer endRefresh];
-    });
+    - (void)request
+    {
+     [self.collectionView.header endRefresh];
+     [self.collectionView.footer endRefresh];
+    }
 ```
 ###collectionView
 ```objective-c
@@ -62,8 +63,9 @@
             [self request];
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-          [self.collectionView.header endRefresh];
-          [self.collectionView.footer endRefresh];
-    });
+   - (void)request
+    {
+     [self.collectionView.header endRefresh];
+     [self.collectionView.footer endRefresh];
+    }
 ```
