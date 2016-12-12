@@ -50,8 +50,8 @@
     
     - (void)request
     {
-     [self.collectionView.header endRefresh];
-     [self.collectionView.footer endRefresh];
+     [self.tableView.header endRefresh];
+     [self.tableView.footer endRefresh];
     }
 ```
 ###collectionView
