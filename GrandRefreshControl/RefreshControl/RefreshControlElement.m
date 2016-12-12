@@ -39,7 +39,7 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
 - (void)afterMoveToSuperview
 {
     _arrow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow"]];
-    #warning console will input 'error Two-stage rotation animation is deprecated' when rotate arrow. Because this application should use the smoother single-stage animation.that I was simply using the Tab Bar Controller wrong: the tab bar should only be used as a root controller, however I inserted a navigation controller before it.
+#warning console will input 'error Two-stage rotation animation is deprecated' when rotate arrow. Because this application should use the smoother single-stage animation.that I was simply using the Tab Bar Controller wrong: the tab bar should only be used as a root controller, however I inserted a navigation controller before it.
     _arrow.frame = CGRectMake((CGRectGetWidth(self.scrollView.frame)-RefreshControlArrowImageWidth)/2, 0, RefreshControlArrowImageWidth, RefreshControlContentHeight);
     [self addSubview:_arrow];
 }
