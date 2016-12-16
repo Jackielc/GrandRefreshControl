@@ -22,20 +22,20 @@
     self.rows = 25;
     self.tableView.tableFooterView = [[UIView alloc]init];
     
-//        self.tableView.header = [RefreshHeader headerWithNextStep:^{
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [self.tableView.header endRefresh];
-//            });
-//        }];
-//        self.tableView.footer = [RefreshFooter footerWithNextStep:^{
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [self.tableView.footer endRefresh];
-//            });
-//        }];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.rows = 30;
-//        [self.tableView reloadData];
-//    });
+    //        self.tableView.header = [RefreshHeader headerWithNextStep:^{
+    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //                [self.tableView.header endRefresh];
+    //            });
+    //        }];
+    //        self.tableView.footer = [RefreshFooter footerWithNextStep:^{
+    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //                [self.tableView.footer endRefresh];
+    //            });
+    //        }];
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //        self.rows = 30;
+    //        [self.tableView reloadData];
+    //    });
     
     self.tableView.header = [RefreshHeader headerWithTarget:self nextAction:@selector(nslog)];
     self.tableView.footer = [RefreshFooter footerWithTarget:self nextAction:@selector(nslog)];
@@ -49,6 +49,8 @@
         [self.tableView.header endRefresh];
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.rows+=8;
+        [self.tableView reloadData];
         [self.tableView.footer endRefresh];
     });
 }
@@ -77,13 +79,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
