@@ -36,7 +36,7 @@
 
 - (void)refreshControlContentOffsetDidChange:(CGFloat)y isDragging:(BOOL)dragging
 {
-    if (y< -RefreshControlContentInset&&y<0)
+    if (y < -RefreshControlContentInset && y < 0)
     {
         [self refreshControlWillEnterRefreshState];
         if (!dragging) {
