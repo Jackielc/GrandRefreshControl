@@ -57,8 +57,7 @@ const CGFloat RefreshControlTimeIntervalDuration       = 0.1f;
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if (!self.isUserInteractionEnabled) return;
-    if (self.hidden) return;
+    if (!self.isUserInteractionEnabled||self.hidden) return;
     if ([keyPath isEqualToString:RefreshControlObserverKeyPathContentOffset]) {
         [self refreshControlContentOffsetDidChange:([change[@"new"] CGPointValue].y) isDragging:self.scrollView.isDragging];
     }
