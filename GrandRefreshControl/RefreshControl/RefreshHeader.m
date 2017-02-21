@@ -8,9 +8,6 @@
 
 #import "RefreshHeader.h"
 
-@interface RefreshHeader()
-@end
-
 @implementation RefreshHeader
 
 + (RefreshHeader *)headerWithNextStep:(void(^)())next
